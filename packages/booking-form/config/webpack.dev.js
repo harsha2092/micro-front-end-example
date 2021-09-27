@@ -3,21 +3,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 const commonConfig = require('./webpack.common');
+
 const devConfig = {
     mode: 'development',
     devServer: {
-        port: 8080,
+        port: 8082,
         historyApiFallback: {
-            index: '/',
-            disableDotRule: true,
+            index: 'index.html',
         },
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: 'container',
-            remotes: {
-                homePage: 'homePage@http://localhost:8081/remoteEntry.js',
-                booking: 'booking@http://localhost:8082/remoteEntry.js'
+            name: 'booking',
+            filename: 'remoteEntry.js',
+            exposes: {
+                './BookingPage': './src/bootstrap',
             },
             shared: ['react', 'react-dom']
         }),

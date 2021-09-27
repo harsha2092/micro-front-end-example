@@ -14,10 +14,10 @@ const devConfig = {
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: 'marketing',
+            name: 'homePage',
             filename: 'remoteEntry.js',
             exposes: {
-                './MarketingApp': './src/bootstrap',
+                './HomePage': './src/bootstrap',
             },
             shared: ['react', 'react-dom']
         }),
